@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A Community</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #0A0A2A, #1E1E50);
+            color: #E3E1F9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #FFFFFF;
+            font-size: 48px;
+            margin-top: 20px;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        h1:hover {
+            transform: scale(1.05);
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .faq-column, .query-column {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .faq-column:hover, .query-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+        .faq-column {
+            width: 55%;
+        }
+        .query-column {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .bento-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+        }
+        .faq-item {
+            text-align: left;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .faq-item:nth-child(1) { animation-delay: 0.2s; }
+        .faq-item:nth-child(2) { animation-delay: 0.4s; }
+        .faq-item:nth-child(3) { animation-delay: 0.6s; }
+        .faq-item:nth-child(4) { animation-delay: 0.8s; }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #B983FF;
+        }
+        .query-input, .query-button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #B983FF;
+            font-size: 16px;
+        }
+        .query-input {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .query-button {
+            background: #B983FF;
+            color: #FFFFFF;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .query-button:hover {
+            background: #A16EE5;
+            transform: scale(1.05);
+        }
+        .mentoring {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .mentoring:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+        }
+        .mentoring h2, .mentoring p {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Community Q&A</h1>
+    <div class="container">
+        <div class="faq-column">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <p class="faq-question">🔹 How can I improve my budgeting skills?</p>
+                <p class="faq-answer">Track your expenses, set goals, and follow the 50/30/20 rule.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-question">🔹 What are the best investment options?</p>
+                <p class="faq-answer">Diversify your portfolio with stocks, mutual funds, and real estate.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-question">🔹 How do I start saving efficiently?</p>
+                <p class="faq-answer">Set automatic savings, reduce unnecessary expenses, and use high-interest accounts.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-question">🔹 Why is financial mentorship important?</p>
+                <p class="faq-answer">It provides expert guidance, helps avoid financial mistakes, and improves financial planning.</p>
+            </div>
+        </div>
+        
+        <div class="query-column">
+            <div class="bento-box">
+                <h2>Add Your Query</h2>
+                <input type="text" class="query-input" id="query" placeholder="Enter your query here">
+                <button class="query-button" onclick="submitQuery()">Submit Query</button>
+                <p id="query-response"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="bento-box mentoring">
+            <h2>Free Mentoring Sessions</h2>
+            <p>Get expert guidance on budgeting, investing, and financial planning.</p>
+            <p>✅ Avoid financial mistakes</p>
+            <p>✅ Learn investment strategies</p>
+            <p>✅ Get personalized advice</p>
+            <button class="query-button" onclick="alert('Session Booked!')">Book a Free Session</button>
+        </div>
+    </div>
+
+    <script>
+        function submitQuery() {
+            let query = document.getElementById("query").value;
+            document.getElementById("query-response").innerText = `Your query "${query}" has been submitted!`;
+        }
+    </script>
+</body>
+</html>

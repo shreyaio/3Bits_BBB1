@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeting & Investment</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0A0A1E;
+            color: #E3E1F9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 40px;
+            color: #B983FF;
+            margin: 20px 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+        .container input {
+            font-size: 20px;
+            padding: 10px;
+            width: 250px;
+            text-align: center;
+            border-radius: 8px;
+            border: 2px solid #B983FF;
+        }
+        .bento-box-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .bento-box {
+            background: #1E1E3F;
+            padding: 20px;
+            border-radius: 16px;
+            width: 45%;
+            box-shadow: 0 4px 12px rgba(185, 131, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(185, 131, 255, 0.3);
+        }
+        .expense-table {
+            width: 80%;
+            background: #1E1E3F;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        .expense-table th, .expense-table td {
+            border: 1px solid #B983FF;
+            padding: 6px;
+            text-align: center;
+        }
+        .expense-table th {
+            background: #B983FF;
+            color: #0A0A1E;
+        }
+        .expense-input {
+            margin-top: 10px;
+        }
+        .expense-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background: #B983FF;
+            border: none;
+            color: #0A0A1E;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .sal {
+            font-size: 25px;
+        }
+        .tips {
+            display: none;
+            background: #2A2A5F;
+            color: #E3E1F9;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+        .tips-button {
+            background: #B983FF;
+            border: none;
+            color: #0A0A1E;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .bento-box h2 {
+            font-weight: bold;
+            color: #FFD700; /* Golden color for headings */
+        }
+    </style>
+</head>
+<body>
+    <h1>Budgeting and Investing</h1>
+    <div class="container">
+        <div class="sal"> Enter Your Salary:</div>
+        <input type="number" id="salary" placeholder="Enter amount" oninput="calculateBudget()">
+    </div>
+
+    <div class="bento-box-container">
+        <div class="bento-box">
+            <h2>Savings</h2>
+            <p>It is recommended to save 40% of your salary.</p>
+            <p id="savings-amount">-</p>
+            <button class="tips-button" onclick="toggleTips('saving-tips')">Saving Tips</button>
+            <div id="saving-tips" class="tips">
+                <p>✅ Automate savings.</p>
+                <p>✅ Avoid unnecessary expenses.</p>
+                <p>✅ Use high-interest savings accounts.</p>
+                <p>✅ Follow the 50/30/20 rule.</p>
+            </div>
+        </div>
+        <div class="bento-box">
+            <h2>Emergency Fund</h2>
+            <p>Keep at least 10% of your salary for emergencies.</p>
+            <p id="emergency-amount">-</p>
+        </div>
+    </div>
+
+    <div class="bento-box-container">
+        <div class="bento-box">
+            <h2>Expenses</h2>
+            <p>Your expenses should be within 30% of your salary.</p>
+            <p id="expenses-amount">-</p>
+            <div class="expense-input">
+                <input type="number" id="expense-input" placeholder="Enter your expense">
+                <button onclick="checkExpense()">Add Expense</button>
+                <p id="expense-message"></p>
+            </div>
+
+            <h3>Expense Breakdown</h3>
+            <table class="expense-table">
+                <tr>
+                    <th>Category</th>
+                    <th>Amount (INR)</th>
+                </tr>
+                <tr>
+                    <td>Rent</td>
+                    <td id="rent">₹6,000</td>
+                </tr>
+                <tr>
+                    <td>Groceries</td>
+                    <td id="groceries">₹2,000</td>
+                </tr>
+                <tr>
+                    <td>Transport</td>
+                    <td id="transport">₹1,500</td>
+                </tr>
+                <tr>
+                    <td>Miscellaneous</td>
+                    <td id="misc">₹1,500</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="bento-box">
+            <h2>Investment Portfolio</h2>
+            <p>Investing 20% of your salary can help you grow wealth.</p>
+            <p id="investment-amount">-</p>
+            <button class="tips-button" onclick="toggleTips('investment-tips')">Investment Tips</button>
+            <div id="investment-tips" class="tips">
+                <p>✅ Diversify your investments.</p>
+                <p>✅ Invest in index funds for long-term growth.</p>
+                <p>✅ Start investing early.</p>
+                <p>✅ Review your portfolio regularly.</p>
+            </div>
+            <h3>Invested Stocks & Prices</h3>
+            <p>Apple - ₹2000</p>
+            <p>Tesla - ₹1500</p>
+            <p>Microsoft - ₹1800</p>
+            <p>Reliance - ₹2200</p>
+            <p>Tata Motors - ₹1300</p>
+            <h3>Recommended Stocks & Prices</h3>
+            <p>Google - ₹2500</p>
+            <p>Amazon - ₹2300</p>
+            <p>Nvidia - ₹2700</p>
+            <p>Infosys - ₹1200</p>
+            <p>Adani Enterprises - ₹1400</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateBudget() {
+            let salary = document.getElementById("salary").value;
+            if (salary > 0) {
+                document.getElementById("savings-amount").innerText = `₹${(salary * 0.4).toFixed(2)}`;
+                document.getElementById("expenses-amount").innerText = `₹${(salary * 0.3).toFixed(2)}`;
+                document.getElementById("investment-amount").innerText = `₹${(salary * 0.2).toFixed(2)}`;
+                document.getElementById("emergency-amount").innerText = `₹${(salary * 0.1).toFixed(2)}`;
+            }
+        }
+
+        function toggleTips(id) {
+            let tips = document.getElementById(id);
+            tips.style.display = tips.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</body>
+</html>
